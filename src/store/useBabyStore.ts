@@ -1,11 +1,24 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-interface BabyStore {
-    currentBaby: any | null;
-    setCurrentBaby: (baby: any) => void;
+export interface Baby {
+  id: string;
+  nickname: string;
+  birth: string;
+  memo?: string;
 }
-  
-export const useBabyStore = create<BabyStore>((set) => ({
-    currentBaby: null,
-    setCurrentBaby: (baby) => set({ currentBaby: baby }),
-}));
+
+interface BabyState {
+  currentBaby: Baby | null;
+  setCurrentBaby: (baby: Baby | null) => void;
+}
+
+export const useBabyStore = create<BabyState>()(
+  persist(
+    (set) => ({
+      currentBaby: null,
+      setCurrentBaby: (baby) => set({ currentBaby: baby }),
+    }),
+    { name: 'baby-storage' } // 새로고침해도 선택된 아기 유지
+  )
+);

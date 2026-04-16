@@ -9,13 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as HomeRouteRouteImport } from './routes/_home/route'
 import { Route as HomeIndexRouteImport } from './routes/_home/index'
+import { Route as HomeSettingsRouteImport } from './routes/_home/settings'
 import { Route as HomeHistoryRouteImport } from './routes/_home/history'
 import { Route as HomeDashboardRouteImport } from './routes/_home/dashboard'
 import { Route as HomeActivitylogRouteImport } from './routes/_home/activitylog'
 
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -28,6 +35,11 @@ const HomeRouteRoute = HomeRouteRouteImport.update({
 const HomeIndexRoute = HomeIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => HomeRouteRoute,
+} as any)
+const HomeSettingsRoute = HomeSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => HomeRouteRoute,
 } as any)
 const HomeHistoryRoute = HomeHistoryRouteImport.update({
@@ -49,48 +61,78 @@ const HomeActivitylogRoute = HomeActivitylogRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof HomeIndexRoute
   '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/activitylog': typeof HomeActivitylogRoute
   '/dashboard': typeof HomeDashboardRoute
   '/history': typeof HomeHistoryRoute
+  '/settings': typeof HomeSettingsRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/activitylog': typeof HomeActivitylogRoute
   '/dashboard': typeof HomeDashboardRoute
   '/history': typeof HomeHistoryRoute
+  '/settings': typeof HomeSettingsRoute
   '/': typeof HomeIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_home': typeof HomeRouteRouteWithChildren
   '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/_home/activitylog': typeof HomeActivitylogRoute
   '/_home/dashboard': typeof HomeDashboardRoute
   '/_home/history': typeof HomeHistoryRoute
+  '/_home/settings': typeof HomeSettingsRoute
   '/_home/': typeof HomeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/activitylog' | '/dashboard' | '/history'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/signup'
+    | '/activitylog'
+    | '/dashboard'
+    | '/history'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/activitylog' | '/dashboard' | '/history' | '/'
+  to:
+    | '/login'
+    | '/signup'
+    | '/activitylog'
+    | '/dashboard'
+    | '/history'
+    | '/settings'
+    | '/'
   id:
     | '__root__'
     | '/_home'
     | '/login'
+    | '/signup'
     | '/_home/activitylog'
     | '/_home/dashboard'
     | '/_home/history'
+    | '/_home/settings'
     | '/_home/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   HomeRouteRoute: typeof HomeRouteRouteWithChildren
   LoginRoute: typeof LoginRoute
+  SignupRoute: typeof SignupRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -110,6 +152,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof HomeIndexRouteImport
+      parentRoute: typeof HomeRouteRoute
+    }
+    '/_home/settings': {
+      id: '/_home/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof HomeSettingsRouteImport
       parentRoute: typeof HomeRouteRoute
     }
     '/_home/history': {
@@ -140,6 +189,7 @@ interface HomeRouteRouteChildren {
   HomeActivitylogRoute: typeof HomeActivitylogRoute
   HomeDashboardRoute: typeof HomeDashboardRoute
   HomeHistoryRoute: typeof HomeHistoryRoute
+  HomeSettingsRoute: typeof HomeSettingsRoute
   HomeIndexRoute: typeof HomeIndexRoute
 }
 
@@ -147,6 +197,7 @@ const HomeRouteRouteChildren: HomeRouteRouteChildren = {
   HomeActivitylogRoute: HomeActivitylogRoute,
   HomeDashboardRoute: HomeDashboardRoute,
   HomeHistoryRoute: HomeHistoryRoute,
+  HomeSettingsRoute: HomeSettingsRoute,
   HomeIndexRoute: HomeIndexRoute,
 }
 
@@ -157,6 +208,7 @@ const HomeRouteRouteWithChildren = HomeRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   HomeRouteRoute: HomeRouteRouteWithChildren,
   LoginRoute: LoginRoute,
+  SignupRoute: SignupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
