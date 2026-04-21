@@ -17,7 +17,7 @@ export const useGetTodayActivityLogs = () => {
   });
 };
 
-// 기록 생성 훅 (이름을 useCreateActivityLog 로 통일!)
+// 기록 생성 훅
 export const useCreateActivityLog = () => {
   const queryClient = useQueryClient();
   const currentBaby = useBabyStore((state) => state.currentBaby);
@@ -41,7 +41,6 @@ export const useGetHistoryStates = (targetDate: string) => {
   const currentBaby = useBabyStore((state) => state.currentBaby);
 
   return useQuery({
-    // queryKey에 날짜를 명시하여 날짜를 바꿀 때마다 캐시를 분리
     queryKey: ['states', currentBaby?.id, targetDate], 
     queryFn: async () => {
       const { data } = await api.get(`/states/${currentBaby?.id}?target_date=${targetDate}`);
@@ -62,7 +61,6 @@ export const useUpdateState = () => {
       return data;
     },
     onSuccess: () => {
-      // 수정 후 해당 아기의 모든 상태 캐시 무효화 (새로고침)
       queryClient.invalidateQueries({ queryKey: ['states', currentBaby?.id] });
     }
   });

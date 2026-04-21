@@ -25,12 +25,12 @@ api.interceptors.response.use(
         const res = await axios.post('http://127.0.0.1:8000/refresh', { refresh_token: rfToken });
         
         const { access_token } = res.data;
-        useAuthStore.getState().setTokens(access_token, rfToken!); // 신규 토큰 저장
+        useAuthStore.getState().setTokens(access_token, rfToken!);
         
         originalRequest.headers.Authorization = `Bearer ${access_token}`;
         return api(originalRequest);
       } catch (refreshError) {
-        useAuthStore.getState().logout(); // 갱신 실패 시 로그아웃
+        useAuthStore.getState().logout();
         return Promise.reject(refreshError);
       }
     }

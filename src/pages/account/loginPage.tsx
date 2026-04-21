@@ -5,31 +5,23 @@ import { useLogin } from '../../hooks/useAuth';
 export const LoginPage = () => {
   const [accountId, setAccountId] = useState('');
   const [accountPwd, setAccountPwd] = useState('');
-  
-  // TanStack Router의 네비게이션 훅
   const navigate = useNavigate(); 
-  // URL의 쿼리 파라미터에서 redirect 주소를 읽어옵니다.
   const search = useSearch({ from: '/login' }) as { redirect?: string };
   
-  // 로그인 API 훅 호출
   const loginMutation = useLogin();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 백엔드가 요구하는 필드명(account_id, account_pwd)에 맞춰 전송
     loginMutation.mutate(
       { account_id: accountId, account_pwd: accountPwd },
       {
         onSuccess: () => {
-          // 1. redirect 정보가 있으면 그 주소로 이동
-          // 2. 없으면 기본값인 대시보드로 이동
           const destination = search.redirect || '/dashboard';
           
           if (destination.startsWith('/')) {
             navigate({ to: destination as any });
           } else {
-            // 외부 주소인 경우 처리 (보통은 내부 주소임)
             window.location.href = destination;
           }
         },
@@ -82,7 +74,7 @@ export const LoginPage = () => {
         <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '14px', color: '#666' }}>
           아직 계정이 없으신가요? <br />
           <button 
-            onClick={() => navigate({ to: '/signup' })} // 회원가입 페이지로 이동
+            onClick={() => navigate({ to: '/signup' })}
             style={linkButtonStyle}
           >
             회원가입 하러 가기
@@ -93,7 +85,6 @@ export const LoginPage = () => {
   );
 };
 
-// --- 간단한 인라인 스타일 ---
 const containerStyle: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'center',

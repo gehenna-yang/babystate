@@ -22,7 +22,6 @@ export const useCreateBaby = () => {
       return data;
     },
     onSuccess: () => {
-      // 등록 성공 시 'babys' 키를 가진 쿼리를 무효화하여 목록을 새로고침함
       queryClient.invalidateQueries({ queryKey: ['babys'] });
     },
   });
@@ -37,7 +36,6 @@ export const useUpdateBaby = () => {
       return response.data;
     },
     onSuccess: () => {
-      // 아기 목록 정보가 바뀌었으므로 캐시 갱신
       queryClient.invalidateQueries({ queryKey: ['babys'] });
     }
   });

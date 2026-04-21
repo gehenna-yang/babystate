@@ -6,7 +6,6 @@ import api from '../../repository/authRepository';
 export const SignupPage = () => {
   const navigate = useNavigate();
   
-  // 입력 폼 상태 관리
   const [formData, setFormData] = useState({
     account_id: '',
     account_pwd: '',
@@ -14,15 +13,14 @@ export const SignupPage = () => {
     memo: ''
   });
 
-  // 회원가입 API 호출을 위한 Mutation
   const signupMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
-      const response = await api.post('/register', data);
+      const response = await api.post('/signup', data);
       return response.data;
     },
     onSuccess: () => {
       alert('회원가입이 완료되었습니다! 로그인 페이지로 이동합니다.');
-      navigate({ to: '/login' }); // 가입 완료 후 로그인 페이지로 전환
+      navigate({ to: '/login' });
     },
     onError: (error: any) => {
       const detail = error.response?.data?.detail;
@@ -114,7 +112,6 @@ export const SignupPage = () => {
   );
 };
 
-// 스타일 (로그인 페이지와 통일감 유지)
 const containerStyle: React.CSSProperties = {
   display: 'flex', justifyContent: 'center', alignItems: 'center',
   minHeight: '100vh', backgroundColor: '#f4f7f6'

@@ -93,7 +93,6 @@ export const ActivityModal = ({ isOpen, onClose, initialData }: ActivityModalPro
             </select>
           </div>
 
-          {/* 조건부 입력창들 */}
           {activityType === 'FEEDING' && (
             <div className="modal-form-group">
               <label className="control-label">수유량 (ml)</label>
@@ -141,7 +140,6 @@ export const ActivityModal = ({ isOpen, onClose, initialData }: ActivityModalPro
           </div>
 
           <div className="modal-actions">
-            {/* 삭제 버튼은 실수 방지를 위해 왼쪽 끝으로 밀어냅니다 */}
             {initialData && (
               <button type="button" onClick={handleDelete} className="danger-btn" style={{ marginRight: 'auto' }}>
                 삭제
