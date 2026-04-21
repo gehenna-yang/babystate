@@ -35,7 +35,12 @@ export const ActivityLogPage = () => {
   return (
       <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
         
-        {/* 🌟 복구된 아기 선택 메뉴 영역 🌟 */}
+        <ActivityModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+          initialData={selectedLog} 
+        />
+        
         <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
           <label style={{ fontWeight: 'bold', marginRight: '10px' }}>현재 관리 중인 아기: </label>
           <select 
@@ -54,7 +59,6 @@ export const ActivityLogPage = () => {
   
         <hr style={{ border: 'none', borderTop: '1px solid #eee', marginBottom: '20px' }} />
   
-        {/* 모달 열기 버튼 */}
         <div style={{ margin: '20px 0' }}>
           <button 
             onClick={handleOpenCreate} 
@@ -64,14 +68,6 @@ export const ActivityLogPage = () => {
           </button>
         </div>
   
-        {/* 모달 컴포넌트 */}
-        <ActivityModal 
-          isOpen={isModalOpen} 
-          onClose={() => setIsModalOpen(false)} 
-          initialData={selectedLog} 
-        />
-  
-        {/* 당일 기록 리스트 */}
         <h3>오늘({new Date().toLocaleDateString()})의 기록</h3>
         {isLoading ? <p>불러오는 중...</p> : (
           <ul style={{ listStyle: 'none', padding: 0 }}>

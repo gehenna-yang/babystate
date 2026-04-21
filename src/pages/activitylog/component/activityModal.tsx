@@ -145,12 +145,12 @@ export const ActivityModal = ({ isOpen, onClose, initialData }: ActivityModalPro
           <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end', marginTop: '20px' }}>
             {/* 수정 모드일 때만 삭제 버튼 표시 */}
             {initialData && (
-              <button type="button" onClick={handleDelete} style={{ backgroundColor: '#ff4d4f', color: 'white', border: 'none', borderRadius: '4px', padding: '8px 12px' }}>
+              <button type="button" onClick={handleDelete} style={{ backgroundColor: '#ff4d4f', color: 'white', border: 'none', borderRadius: '4px', padding: '8px 12px', cursor: 'pointer' }}>
                 삭제
               </button>
             )}
-            <button type="button" onClick={onClose} style={{ padding: '8px 12px' }}>취소</button>
-            <button type="submit" disabled={createLogMutation.isPending || updateLogMutation.isPending} style={{ backgroundColor: '#4A90E2', color: 'white', border: 'none', borderRadius: '4px', padding: '8px 12px' }}>
+            <button type="button" onClick={onClose} style={{ padding: '8px 12px', cursor: 'pointer' }}>취소</button>
+            <button type="submit" disabled={createLogMutation.isPending || updateLogMutation.isPending} style={{ backgroundColor: '#4A90E2', color: 'white', border: 'none', borderRadius: '4px', padding: '8px 12px', cursor: 'pointer' }}>
               {initialData ? '수정하기' : '저장하기'}
             </button>
           </div>

@@ -1,0 +1,181 @@
+/* src/pages/DashboardPage.css */
+.dashboard-wrapper {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #303333;
+  }
+  
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.dashboard-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #093754;
+  margin: 0;
+}
+
+.baby-selector-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.total-babies-badge {
+  background-color: #e4fff4;
+  color: #245146;
+  padding: 15px 30px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.baby-select {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid #d8dad9;
+  background-color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3d6381;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.profile-card {
+  background: linear-gradient(135deg, #b0d6fa 0%, #e4fff4 100%);
+  border-radius: 24px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 20px rgba(61, 99, 129, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profile-icon {
+  width: 70px;
+  height: 70px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3d6381;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.profile-info h2 {
+  margin: 0 0 8px 0;
+  font-size: 2rem;
+  color: #093754;
+  font-weight: 800;
+}
+
+.profile-info p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #2d5472;
+  font-weight: 600;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.summary-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 16px rgba(48, 51, 51, 0.04);
+  border: 1px solid #f3f4f3;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  color: #5d605f;
+  font-weight: 700;
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feed-icon { background: #ffe4e6; color: #e11d48; }
+.poo-icon { background: #fef3c7; color: #d97706; }
+.med-icon { background: #e0e7ff; color: #4f46e5; }
+
+.card-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #303333;
+  margin-bottom: 5px;
+}
+
+.card-unit {
+  font-size: 1rem;
+  color: #787b7a;
+  font-weight: 500;
+}
+
+/* 투약 내역 리스트 */
+.med-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.med-item {
+  background: #f8fafc;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  color: #334155;
+  font-weight: 600;
+}
+
+.last-time-label {
+  margin-top: auto; /* 카드의 맨 아래로 밀어냄 */
+  padding-top: 12px;
+  border-top: 1px dashed #edeeed;
+  font-size: 0.85rem;
+  color: #787b7a;
+  font-weight: 600;
+}
+
+.last-time-label span {
+  color: var(--primary); /* 강조 색상 */
+  margin-left: 4px;
+}
+
+.no-data {
+  color: #9d9d9c;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}

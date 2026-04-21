@@ -5,18 +5,13 @@ import { ActivityModal } from '../activitylog/component/activityModal';
 
 export const HistoryPage = () => {
   const { currentBaby } = useBabyStore();
-  
-  // 기본값을 오늘 날짜(YYYY-MM-DD)로 세팅
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  // 클릭한 기록의 데이터를 담을 State
   const [selectedLog, setSelectedLog] = useState<any | null>(null); 
   const { data: historyStates, isLoading } = useGetHistoryStates(selectedDate);
 
-  // 기존 기록 항목 클릭 시
   const handleOpenEdit = (log: any) => {
-    setSelectedLog(log); // 클릭한 데이터를 세팅해서 수정 모드로
+    setSelectedLog(log);
     setIsModalOpen(true);
   };
 
@@ -30,10 +25,9 @@ export const HistoryPage = () => {
       <ActivityModal
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
-        initialData={selectedLog} // 모달에 데이터 넘겨주기
+        initialData={selectedLog}
       />
 
-      {/* 날짜 선택기 */}
       <div style={{ marginBottom: '20px' }}>
         <label style={{ marginRight: '10px' }}>날짜 선택: </label>
         <input 
@@ -51,7 +45,7 @@ export const HistoryPage = () => {
           {historyStates?.map((state: any) => (
             <li 
             key={state.id} 
-            onClick={() => handleOpenEdit(state)} // 항목 클릭 시 모달 열기!
+            onClick={() => handleOpenEdit(state)}
             style={{ border: '1px solid #ddd', padding: '15px', marginBottom: '10px', borderRadius: '8px', cursor: 'pointer', backgroundColor: '#fafafa' }}
           >
             <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>
@@ -73,7 +67,6 @@ export const HistoryPage = () => {
               {state.type === 'DIAPER' && `상태: ${state.value?.state === 'pee' ? '소변' : state.value?.state === 'poo' ? '대변' : '둘 다'}`}
               {state.type === 'MEDICATION' && `약 종류: ${state.value?.medicine}`}
               {state.type === 'FEVER' && `체온: ${state.value?.temperature} °C`}
-              {/* 목욕과 기타는 메모로 대체 */}
             </div>
             {state.memo && <div style={{ color: '#666', fontSize: '14px', marginTop: '5px' }}>메모: {state.memo}</div>}
           </li>
