@@ -1,5 +1,6 @@
-import { createFileRoute, Link, Outlet, redirect } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 import { useAuthStore } from '../../store/useAuthStore'
+import { NavBarLayOut } from '../../pages/navbar/navBarLayout'
 
 export const Route = createFileRoute('/_home')({
   beforeLoad: ({ location }) => {
@@ -16,20 +17,5 @@ export const Route = createFileRoute('/_home')({
       })
     }
   },
-  component: HomeLayout,
+  component: NavBarLayOut,
 })
-
-function HomeLayout() {
-  return (
-    <div style={{ padding: '20px' }}>
-      <nav style={{display:'flex', gap: '10px'}}>
-        <Link to="/dashboard">대시보드</Link>
-        <Link to="/activitylog">활동기록</Link>
-        <Link to="/history">히스토리</Link>
-        <Link to="/settings">설정</Link>
-      </nav>
-      <hr />
-      <Outlet />
-    </div>
-  )
-}
